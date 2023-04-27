@@ -5,15 +5,23 @@
   "main": "app.ts",
   "author": "LYSAK",
   "license": "UNLICENSED",
+  "scripts": {
+    "start:app": "ts-node app.ts",
+    "start:sync": "ts-node sync.ts",
+    "start:full-sync": "ts-node sync --full-reindex"
+  },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@types/dotenv": "^8.2.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^18.16.1",
     "@types/randomstring": "^1.1.8",
+    "D": "^1.0.0",
     "dotenv": "^16.0.3",
     "faker": "^6.6.6",
     "mongoose": "^7.0.5",
-    "randomstring": "^1.2.3"
+    "randomstring": "^1.2.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   }
 }
