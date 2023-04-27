@@ -1,7 +1,7 @@
 import randomstring from "randomstring";
 import { faker } from "@faker-js/faker";
 import { Types } from "mongoose";
-import { IUser, IUserUpdate } from "./schemas";
+import { IUser } from "./schemas";
 
 const randomize = (): string =>
   randomstring.generate({
@@ -25,10 +25,8 @@ export function anonymizeInsertCustomer(data: IUser): IUser {
   return anonymized;
 }
 
-export function anonymizeUpdateCustomer(
-  updatedFields: IUserUpdate
-): IUserUpdate {
-  const anonymized: IUserUpdate = {
+export function anonymizeUpdateCustomer(updatedFields: IUser): IUser {
+  const anonymized: IUser = {
     ...updatedFields,
     firstName: updatedFields.firstName && randomize(),
     lastName: updatedFields.lastName && randomize(),
