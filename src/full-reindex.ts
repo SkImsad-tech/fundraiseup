@@ -17,7 +17,7 @@ async function fullReindex(): Promise<void> {
     do {
       const result = await Customer.find({}, "+_id -__v", {
         skip: counter,
-        limit: Number(process.env.DB_LIMIT_QUERY),
+        limit: Number(100),
       })
         .lean()
         .exec();
@@ -27,8 +27,12 @@ async function fullReindex(): Promise<void> {
         return res;
       });
       counter = counter + docs.length;
-      await CustomerAnonyms.insertMany(docs, { ordered: false });
-    } while (false);
+      try {
+        await CustomerAnonyms.insertMany(docs, { ordered: false });
+      } catch (err: any) {
+        if (err.code !== Number(process.env.DUPLICATED_DOC_CODE)) throw err;
+      }
+    } while (docs.length > 0);
     console.timeEnd("reindex_timer");
   } catch (err) {
     console.error(err);
