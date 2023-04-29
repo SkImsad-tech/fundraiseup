@@ -30,4 +30,6 @@
 
 P.S. Обратите внимание, что вы должны быть подключены к набору реплик MongoDB или общему кластеру, чтобы работала функция прослушки ивентов БД. Подробности описаны [здесь.](https://mongoosejs.com/docs/change-streams.html)
 
+P.S.S. регулярка для проверки email взял [отсюда](https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression)
+
 Начало работы 26.04.2023 - 14:22 МСК / Конец работы - 27.04.2023 - 13:24 МСК
