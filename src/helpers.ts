@@ -48,7 +48,6 @@ export function anonymizeUpdateCustomer(updatedFields: IUser): IUser {
 
 export function createRandomUser(): IUser {
   return {
-    _id: new Types.ObjectId(),
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
     email: faker.internet.email(),
@@ -60,7 +59,7 @@ export function createRandomUser(): IUser {
       state: faker.address.state(),
       country: faker.address.country(),
     },
-    createdAt: new Date().toISOString(),
+    createdAt: new Date(),
   };
 }
 
