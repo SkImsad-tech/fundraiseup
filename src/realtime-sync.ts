@@ -8,7 +8,7 @@ import {
   ICreateDoc,
 } from "./schemas";
 
-import { anonymizeInsertCustomer, anonymizeUpdateCustomer } from "./helpers";
+import { anonymizeCustomer } from "./randomize";
 
 let resumeToken: undefined | object = undefined;
 if (fs.existsSync("./key.json")) {
@@ -52,13 +52,13 @@ async function watchUpdates(
   while ((doc = await Promise.race([changeStream.next(), timer]))) {
     if (doc.operationType === "insert") {
       docs.push({
-        insertOne: { document: anonymizeInsertCustomer(doc.fullDocument) },
+        insertOne: { document: anonymizeCustomer(doc.fullDocument) },
       });
     } else {
       docs.push({
         updateOne: {
           filter: { _id: doc.documentKey._id },
-          update: anonymizeUpdateCustomer(doc.updateDescription.updatedFields),
+          update: anonymizeCustomer(doc.updateDescription.updatedFields),
         },
       });
     }

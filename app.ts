@@ -1,8 +1,32 @@
 import dotenv from "dotenv";
 dotenv.config();
+import { faker } from "@faker-js/faker";
 import { model, connect, Model } from "mongoose";
 import { IUser, CustomerSchema } from "./src/schemas";
-import { createRandomUser, getRandomInt } from "./src/helpers";
+
+function getRandomInt(
+  max: number = Number(process.env.MAX_PACK_GENERATED),
+  min: number = Number(process.env.MIN_PACK_GENERATED)
+): number {
+  return Math.floor(Math.random() * max) + min;
+}
+
+export function createRandomUser(): IUser {
+  return {
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
+    email: faker.internet.email(),
+    address: {
+      line1: faker.address.streetAddress(),
+      line2: faker.address.buildingNumber(),
+      postcode: faker.address.zipCode(),
+      city: faker.address.cityName(),
+      state: faker.address.state(),
+      country: faker.address.country(),
+    },
+    createdAt: new Date(),
+  };
+}
 
 async function initFakeDataInsert(Customer: Model<IUser>): Promise<void> {
   setInterval(async () => {

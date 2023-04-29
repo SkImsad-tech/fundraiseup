@@ -1,6 +1,6 @@
 import { model, connect } from "mongoose";
 import { CustomerSchema, CustomerAnonymisedSchema, IUser } from "./schemas";
-import { anonymizeInsertCustomer } from "./helpers";
+import { anonymizeCustomer } from "./randomize";
 
 async function fullReindex(): Promise<void> {
   try {
@@ -23,7 +23,7 @@ async function fullReindex(): Promise<void> {
         .exec();
 
       docs = result.map((doc) => {
-        const res = anonymizeInsertCustomer(doc);
+        const res = anonymizeCustomer(doc);
         return res;
       });
       counter = counter + docs.length;
