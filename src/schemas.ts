@@ -1,12 +1,4 @@
-import { ObjectId, Schema, Types, InferSchemaType, Date } from "mongoose";
-
-export interface ICreateDoc {
-  insertOne: { document: IUser };
-}
-
-export interface IUpdateDoc {
-  updateOne: { filter: { _id: ObjectId }; update: IUser };
-}
+import { ObjectId, Schema, InferSchemaType } from "mongoose";
 
 export const CustomerSchema = new Schema(
   {
@@ -34,3 +26,11 @@ export const CustomerAnonymisedSchema = new Schema<IUser>(
 );
 
 export type IUser = InferSchemaType<typeof CustomerSchema>;
+
+export interface ICreateDoc {
+  insertOne: { document: IUser };
+}
+
+export interface IUpdateDoc {
+  updateOne: { filter: { _id: ObjectId }; update: IUser };
+}
